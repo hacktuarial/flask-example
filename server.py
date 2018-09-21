@@ -1,7 +1,7 @@
 """
 Minimal API to serve predictions from a scikit-learn model with Flask
 Usage:
-    curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/v0/house_value -d '{"x": [2.8333,52.,5.47331787,1.3712297,1100.,2.55220418,33.34,-118.33]}'
+    curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/v0/house_value -d @sample_request.json
 
 """
 import pickle
