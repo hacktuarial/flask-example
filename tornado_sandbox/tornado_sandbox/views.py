@@ -21,9 +21,11 @@ class MakePrediction(RequestHandler):
 
     def post(self):
         row_index = int(json.loads(self.request.body)["row_index"])
-        # verify it's in bounds for self.data
+        # should verify it's in bounds for self.data
 
         # pretend this is a database call
         x = self.data[row_index, :].reshape(1, -1)
+
+        # this part is CPU-bound
         output = {"predicted_housing_value": self.model.predict(x)[0]}
-        self.write(json.dumps(output))
+        self.write(output)
