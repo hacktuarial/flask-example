@@ -9,6 +9,7 @@ class HelloWorld(RequestHandler):
     def get(self):
         self.write("hello world")
 
+
 class MakePrediction(RequestHandler):
     SUPPORTED_METHODS = ["POST"]
 

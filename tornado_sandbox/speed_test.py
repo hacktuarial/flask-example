@@ -18,16 +18,16 @@ URL = "http://localhost:80/api/v0/house_value"
 
 
 def get_prediction(i):
-    resp = requests.post(URL,
-            json={"row_index": int(i)})
+    resp = requests.post(URL, json={"row_index": int(i)})
     result = {**resp.json(), **{"row_index": i}}
     print(result)
     return result
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     indexes = np.random.randint(low=0, high=20000, size=100)
     p = mp.Pool(4)
     tic = time.perf_counter()
     p.map(get_prediction, indexes)
     toc = time.perf_counter()
-    print("It took %f seconds to do %d requests" % (toc-tic, len(indexes)))
+    print("It took %f seconds to do %d requests" % (toc - tic, len(indexes)))
