@@ -7,16 +7,17 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options
 from tornado.web import Application
 from tornado_sandbox.views import HelloWorld, MakePrediction
-import numpy as np
+import pickle
 
 define('port', default=8888, help='port to listen on')
 
 def main():
     """Construct and serve the tornado application."""
-    coefs = np.random.normal(size=8)
+    with open('../model.pkl', 'rb') as f:
+        model = pickle.load(f)
     app = Application([
         ('/', HelloWorld),
-        ('/api/v0/house_value', MakePrediction, {"coefs": coefs}),
+        ('/api/v0/house_value', MakePrediction, {"model": model}),
         ])
     http_server = HTTPServer(app)
     http_server.listen(options.port)
