@@ -10,4 +10,3 @@ class MakePrediction(RequestHandler):
     def post(self, data):
         pred = pipeline.predict(data)
         self.write({'predicted_housing_value': pred})
-
