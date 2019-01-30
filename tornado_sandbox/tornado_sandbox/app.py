@@ -6,6 +6,7 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options
 from tornado.web import Application
+from tornado import autoreload
 from tornado_sandbox.views import HelloWorld, MakePrediction
 import pickle
 from sklearn.datasets import fetch_california_housing
@@ -35,4 +36,6 @@ def start_server():
 
 if __name__ == "__main__":
     options.parse_command_line()
+    autoreload.start()
+    autoreload.watch('../model.pkl')
     start_server()
