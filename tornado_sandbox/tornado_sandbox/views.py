@@ -1,4 +1,6 @@
 # https://opensource.com/article/18/6/tornado-framework
+import numpy as np
+import json
 from tornado.web import RequestHandler
 
 
@@ -7,6 +9,15 @@ class HelloWorld(RequestHandler):
         self.write("hello world")
 
 class MakePrediction(RequestHandler):
-    def post(self, data):
-        pred = pipeline.predict(data)
-        self.write({'predicted_housing_value': pred})
+    SUPPORTED_METHODS = ["POST"]
+
+    def set_default_headers(self):
+        """Set the default response header to be JSON."""
+        self.set_header("Content-Type", 'application/json; charset="utf-8"')
+
+    def post(self):
+        data = json.loads(self.request.body)
+        x = np.array(data["x"])
+        random_coefs = np.random.normal(size=len(x))
+        output = {"predicted_housing_value": np.inner(x, random_coefs)}
+        self.write(json.dumps(output))
