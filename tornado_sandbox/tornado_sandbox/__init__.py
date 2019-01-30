@@ -8,6 +8,7 @@ from tornado.options import define, options
 from tornado.web import Application
 from tornado_sandbox.views import HelloWorld, MakePrediction
 import pickle
+from sklearn.datasets import fetch_california_housing
 
 define('port', default=8888, help='port to listen on')
 
@@ -17,7 +18,7 @@ def main():
         model = pickle.load(f)
     app = Application([
         ('/', HelloWorld),
-        ('/api/v0/house_value', MakePrediction, {"model": model}),
+        ('/api/v0/house_value', MakePrediction, {"model": model, "data": fetch_california_housing().data}),
         ])
     http_server = HTTPServer(app)
     http_server.listen(options.port)

@@ -11,14 +11,19 @@ class HelloWorld(RequestHandler):
 class MakePrediction(RequestHandler):
     SUPPORTED_METHODS = ["POST"]
 
-    def initialize(self, model):
+    def initialize(self, model, data):
         self.model = model
+        self.data = data
 
     def set_default_headers(self):
         """Set the default response header to be JSON."""
         self.set_header("Content-Type", 'application/json; charset="utf-8"')
 
     def post(self):
-        x = np.array(json.loads(self.request.body)["x"]).reshape(1, -1)
+        row_index = int(json.loads(self.request.body)["row_index"])
+        # verify it's in bounds for self.data
+
+        # pretend this is a database call
+        x = self.data[row_index, :].reshape(1, -1)
         output = {"predicted_housing_value": self.model.predict(x)[0]}
         self.write(json.dumps(output))
