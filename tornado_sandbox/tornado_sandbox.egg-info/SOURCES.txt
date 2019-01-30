@@ -1,8 +1,0 @@
-tornado_sandbox/__init__.py
-tornado_sandbox/handle_request.py
-tornado_sandbox.egg-info/PKG-INFO
-tornado_sandbox.egg-info/SOURCES.txt
-tornado_sandbox.egg-info/dependency_links.txt
-tornado_sandbox.egg-info/entry_points.txt
-tornado_sandbox.egg-info/requires.txt
-tornado_sandbox.egg-info/top_level.txt
