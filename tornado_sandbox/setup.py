@@ -12,9 +12,4 @@ setup(
     keywords='web tornado data-science',
     packages=find_packages(),
     install_requires=requires,
-    entry_points={
-        'console_scripts': [
-            'serve_app = tornado_sandbox:main',
-        ],
-    },
 )
