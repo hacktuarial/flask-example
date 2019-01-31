@@ -16,7 +16,7 @@ define("port", default=8888, help="port to listen on")
 
 def start_server():
     """Construct and serve the tornado application."""
-    with open("model.pkl", "rb") as f:
+    with open("/artifacts/model.pkl", "rb") as f:
         model = pickle.load(f)
 
     np.random.seed(325079)
