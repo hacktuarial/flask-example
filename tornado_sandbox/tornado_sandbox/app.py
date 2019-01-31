@@ -9,22 +9,26 @@ from tornado.web import Application
 from tornado import autoreload
 from tornado_sandbox.views import HelloWorld, MakePrediction
 import pickle
-from sklearn.datasets import fetch_california_housing
+import numpy as np
 
 define("port", default=8888, help="port to listen on")
 
 
 def start_server():
     """Construct and serve the tornado application."""
-    with open("../model.pkl", "rb") as f:
+    with open("model.pkl", "rb") as f:
         model = pickle.load(f)
+
+    np.random.seed(325079)
+    fake_data = np.random.normal(size=(20000, 8))
+
     app = Application(
         [
             ("/", HelloWorld),
             (
                 "/api/v0/house_value",
                 MakePrediction,
-                {"model": model, "data": fetch_california_housing().data},
+                {"model": model, "data": fake_data},
             ),
         ]
     )

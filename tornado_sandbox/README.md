@@ -21,9 +21,18 @@ nginx
 
 Now, start multiple python servers:
 
-```{python}
+## non-docker
+
+```
 python tornado_sandbox/app.py --port=8000
 python tornado_sandbox/app.py --port=8001
+```
+
+## docker version
+
+```
+docker run -v `pwd`:/tornado_sandbox -w /tornado_sandbox --rm -p 8000:8000 tsweetser/tornado:v0 python tornado_sandbox/app.py --port=8000
+docker run -v `pwd`:/tornado_sandbox -w /tornado_sandbox --rm -p 8001:8001 tsweetser/tornado:v0 python tornado_sandbox/app.py --port=8001
 ```
 
 My nginx conf, at `/usr/local/etc/nginx`, looks as follows. It's based on the
