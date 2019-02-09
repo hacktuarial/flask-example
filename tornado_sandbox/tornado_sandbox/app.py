@@ -1,6 +1,6 @@
 """
 Usage:
-curl -XPOST http://localhost:8888/api/v0/house_value -d @sample_request.json
+curl -XPOST http://localhost:8000/api/v0/house_value -d @tornado_sandbox/sample_request.json
 """
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
@@ -11,12 +11,13 @@ from tornado_sandbox.views import HelloWorld, MakePrediction
 import pickle
 from sklearn.datasets import fetch_california_housing
 
-define("port", default=8888, help="port to listen on")
+define("port", default=8000, help="port to listen on")
+MODEL_FILE = "../artifacts/model.pkl"
 
 
 def start_server():
     """Construct and serve the tornado application."""
-    with open("../model.pkl", "rb") as f:
+    with open(MODEL_FILE, "rb") as f:
         model = pickle.load(f)
     app = Application(
         [
@@ -37,5 +38,5 @@ def start_server():
 if __name__ == "__main__":
     options.parse_command_line()
     autoreload.start()
-    autoreload.watch('../model.pkl')
+    autoreload.watch(MODEL_FILE)
     start_server()

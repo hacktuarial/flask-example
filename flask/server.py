@@ -10,9 +10,9 @@ import pickle
 import numpy as np
 from flask import Flask, request, jsonify
 
-MODEL_FILE = "model.pkl"
 app = Flask(__name__)
 app.vars = {}
+MODEL_FILE = "../artifacts/model.pkl"
 
 
 @app.before_first_request

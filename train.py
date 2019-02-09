@@ -4,7 +4,6 @@ from sklearn.datasets import fetch_california_housing
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
-from server import MODEL_FILE
 
 
 def model():
@@ -20,7 +19,7 @@ def train():
     index = np.random.randint(low=0, high=X.shape[0], size=X.shape[0])
     pipeline = model()
     pipeline.fit(X=X[index, :], y=data.target[index])
-    with open(MODEL_FILE, "wb") as f:
+    with open("artifacts/model.pkl", "wb") as f:
         pickle.dump(pipeline, f)
 
 
