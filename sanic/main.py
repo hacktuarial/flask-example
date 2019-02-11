@@ -21,7 +21,8 @@ app = Sanic()
 
 
 @app.route("/api/v0/house_value", methods=["POST"])
-async def test(request):
+async def predict(request):
+    """This function could be called anything"""
     x = np.array(request.json).reshape(1, -1)
     return json({"predicted_housing_value": model.predict(x)[0]})
 
