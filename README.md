@@ -19,7 +19,12 @@ Minimal example of serving a scikit-learn model over a Python server, using the 
 * A little more involved, to try to test the async capabilities of this framework
 
 # Sanic
-TODO
+1. Start the server: `docker run --rm -v $(pwd):/root/sanic -p 8000:8000 -v /Users/timothysweetser/git/flask-example/artifacts:/root/sanic/artifacts -w /root/sanic tsweetser/sanic python main.py`
+2. Hit the server with a sample request: `curl localhost:8000/api/v0/house_value -d @flask/sample_request.json`
+3. Retrain the model: `python train.py`
+4. Tell the server to reload the model: `curl localhost:8000/api/v0/update`
+5. Rerun step 2 and note that you get a different answer!
+
 
 # Aiohttp
 * TODO
