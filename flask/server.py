@@ -23,9 +23,20 @@ def update():
     return jsonify({"updated_at": time.time()})
 
 
-@app.route("/api/v0/house_value", methods=["POST"])
+@app.route("/api/v0/house_value", methods=["GET"])
 def predict():
-    x = np.array(request.json).reshape(1, -1)
+    x = np.array(
+        [
+            2.8333,
+            52.0,
+            5.473317865429235,
+            1.37122969837587,
+            1100.0,
+            2.5522041763341066,
+            33.34,
+            -118.33,
+        ]
+    ).reshape(1, -1)
     pred = app.vars["model"].predict(x)[0]
     return jsonify({"predicted_housing_value": pred})
 

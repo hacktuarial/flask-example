@@ -11,7 +11,7 @@ class HelloWorld(RequestHandler):
 
 
 class MakePrediction(RequestHandler):
-    SUPPORTED_METHODS = ["POST"]
+    SUPPORTED_METHODS = ["POST", "GET"]
 
     def initialize(self, model, data):
         self.model = model
@@ -36,11 +36,20 @@ class MakePrediction(RequestHandler):
     #     output = {"predicted_housing_value": self.model.predict(x)[0]}
     #     self.write(output)
 
-    def post(self):
+    async def get(self):
         """Sync version"""
-        row_index = int(json.loads(self.request.body)["row_index"])
-        time.sleep(np.random.uniform())
-        x = self.data[row_index, :].reshape(1, -1)
+        x = np.array(
+            [
+                2.8333,
+                52.0,
+                5.473317865429235,
+                1.37122969837587,
+                1100.0,
+                2.5522041763341066,
+                33.34,
+                -118.33,
+            ]
+        ).reshape(1, -1)
         # this part is CPU-bound
         output = {"predicted_housing_value": self.model.predict(x)[0]}
         self.write(output)

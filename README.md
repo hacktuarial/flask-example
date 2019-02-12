@@ -32,3 +32,27 @@ Minimal example of serving a scikit-learn model over a Python server, using the 
 # Warning
 * This is not a real production system - no error handling, data validation, authentication, logging, etc etc etc
 * Please file an issue or make a PR if you see any glaring errors
+
+
+# Benchmarks
+```
+
+
+## Sanic
+```
+$ wrk -c 2000 -d 60s -t 12 --latency http://localhost:8000/api/v0/house_value --timeout 5s
+Running 1m test @ http://localhost:8000/api/v0/house_value
+12 threads and 2000 connections
+Thread Stats   Avg      Stdev     Max   +/- Stdev
+Latency   850.17ms  353.58ms   3.49s    74.01%
+Req/Sec   222.55    206.50     1.29k    82.83%
+Latency Distribution
+50%  834.74ms
+75%  946.81ms
+90%    1.27s
+99%    1.93s
+113287 requests in 1.00m, 16.21MB read
+Socket errors: connect 0, read 2353, write 10, timeout 0
+Requests/sec:   1884.95
+Transfer/sec:    276.12KB
+```

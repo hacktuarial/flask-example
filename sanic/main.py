@@ -1,4 +1,5 @@
 """
+Start the server: gunicorn main:app --bind localhost:8000 --worker-class sanic.worker.GunicornWorker --workers 2
 curl localhost:8000/api/v0/house_value -d @flask/sample_request.json
 """
 import time
@@ -46,4 +47,4 @@ def reload(request):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, workers=1)
+    app.run(host="0.0.0.0", port=8000, workers=2)
