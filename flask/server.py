@@ -1,5 +1,6 @@
 """
 Minimal API to serve predictions from a scikit-learn model with Flask
+To start the server with gunicorn: gunicorn -w 2 -b localhost:8000 server:app
 Usage:
     curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/v0/house_value -d @sample_request.json
     curl -X POST http://127.0.0.1:5000/api/v0/update
